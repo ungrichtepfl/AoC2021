@@ -9,9 +9,9 @@ day2Part1 :: FilePath -> IO Int
 day2Part1 filePath = do
   contents <- readFile filePath
   let subActions = parseInput contents
-  let (horizonal, depth) = horizonalDepth (0, 0) subActions
-  print horizonal
-  print depth
+  let (horizonal, depth) = horizonalDepthStartZero subActions
+  putStrLn $ "Horzonal position is: " ++ show horizonal
+  putStrLn $ "Depth is: " ++ show depth
   return $ horizonal * depth
 
 parseInput :: String -> [SubAction]
@@ -32,3 +32,6 @@ horizonalDepth (h, d) (Forward step : rest) = horizonalDepth (h + step, d) rest
 horizonalDepth (h, d) (Down step : rest) = horizonalDepth (h, d + step) rest
 horizonalDepth (h, d) (Up step : rest) = horizonalDepth (h, d - step) rest
 horizonalDepth endPos [] = endPos
+
+horizonalDepthStartZero :: [SubAction] -> (Int, Int)
+horizonalDepthStartZero = horizonalDepth (0, 0)
