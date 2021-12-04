@@ -2,3 +2,5 @@
 .stack-work/
 *~
 out/
+*.o
+*.hi
