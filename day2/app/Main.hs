@@ -11,5 +11,6 @@ inputFileTest = "submarine-trajectory-test.txt"
 main :: IO ()
 main = do
   solution1 <- day2Part1 inputFile
-  --  solution2 <- day1Part2 inputFile
   putStrLn $ "Solution to part 1 is: " ++ show solution1
+  solution2 <- day2Part2 inputFile
+  putStrLn $ "Solution to part 2 is: " ++ show solution2

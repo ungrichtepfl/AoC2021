@@ -1,5 +1,6 @@
 module Day2
   ( day2Part1,
+    day2Part2,
   )
 where
 
@@ -9,10 +10,20 @@ day2Part1 :: FilePath -> IO Int
 day2Part1 filePath = do
   contents <- readFile filePath
   let subActions = parseInput contents
-  let (horizonal, depth) = horizonalDepthStartZero subActions
-  putStrLn $ "Horzonal position is: " ++ show horizonal
+  let (horizontal, depth) = horizonalDepthStartZero subActions
+  putStrLn $ "Horizontal position is: " ++ show horizontal
   putStrLn $ "Depth is: " ++ show depth
-  return $ horizonal * depth
+  return $ horizontal * depth
+
+day2Part2 :: FilePath -> IO Int
+day2Part2 filePath = do
+  contents <- readFile filePath
+  let subActions = parseInput contents
+  let (horizontal, depth, aim) = horizonalDepthAimStartZero subActions
+  putStrLn $ "Aim is: " ++ show aim
+  putStrLn $ "Horizontal position is: " ++ show horizontal
+  putStrLn $ "Depth is: " ++ show depth
+  return $ horizontal * depth
 
 parseInput :: String -> [SubAction]
 parseInput str = map convertToTuple (lines str)
@@ -35,3 +46,12 @@ horizonalDepth endPos [] = endPos
 
 horizonalDepthStartZero :: [SubAction] -> (Int, Int)
 horizonalDepthStartZero = horizonalDepth (0, 0)
+
+horizonalDepthAimStartZero :: [SubAction] -> (Int, Int, Int)
+horizonalDepthAimStartZero = horizonalDepthAim (0, 0, 0)
+
+horizonalDepthAim :: (Int, Int, Int) -> [SubAction] -> (Int, Int, Int)
+horizonalDepthAim (h, d, a) (Forward step : rest) = horizonalDepthAim (h + step, d + step * a, a) rest
+horizonalDepthAim (h, d, a) (Down step : rest) = horizonalDepthAim (h, d, a + step) rest
+horizonalDepthAim (h, d, a) (Up step : rest) = horizonalDepthAim (h, d, a - step) rest
+horizonalDepthAim endPos [] = endPos
