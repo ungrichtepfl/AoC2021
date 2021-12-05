@@ -2,6 +2,7 @@ module Main where
 
 import Day1
 import Day2
+import Day3
 
 inputFileDay1 :: FilePath
 inputFileDay1 = "input/sonar-sweep.txt"
@@ -15,6 +16,12 @@ inputFileDay2 = "input/submarine-trajectory.txt"
 inputFileTestDay2 :: FilePath
 inputFileTestDay2 = "input/submarine-trajectory-test.txt"
 
+inputFileDay3 :: FilePath
+inputFileDay3 = "input/gamma-rates.txt"
+
+inputFileTestDay3 :: FilePath
+inputFileTestDay3 = "input/gamma-rates-test.txt"
+
 main :: IO ()
 main = do
   -- Day 1
@@ -27,3 +34,10 @@ main = do
   putStrLn $ "Solution to Day 2 part 1 is: " ++ show solD2P1
   solD2P2 <- day2Part2 inputFileDay2
   putStrLn $ "Solution to Day 2 part 2 is: " ++ show solD2P2
+
+  -- Day 3
+  solD3P1 <- day3Part1 inputFileDay3
+  putStrLn $ "Solution to Day 3 part 1 is: " ++ show solD3P1
+
+--  solD3P2 <- day3Part2 inputFileTestDay3
+--  putStrLn $ "Solution to Day 2 part 2 is: " ++ show solD3P2
