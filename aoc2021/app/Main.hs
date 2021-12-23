@@ -3,6 +3,7 @@ module Main where
 import Day1
 import Day2
 import Day3
+import Day4
 
 -- Inputs
 
@@ -24,6 +25,12 @@ inputFileDay3 = "input/3_gamma-rates.txt"
 inputFileTestDay3 :: FilePath
 inputFileTestDay3 = "input/3_gamma-rates-test.txt"
 
+inputFileDay4 :: FilePath
+inputFileDay4 = "input/4_bingo.txt"
+
+inputFileTestDay4 :: FilePath
+inputFileTestDay4 = "input/4_bingo-test.txt"
+
 -- Compute solutions to all problems:
 main :: IO ()
 main = do
@@ -43,4 +50,8 @@ main = do
   putStrLn $ "Solution to Day 3 part 1 is: " ++ show solD3P1
 
   solD3P2 <- day3Part2 inputFileDay3
-  putStrLn $ "Solution to Day 3 part 3 is: " ++ show solD3P2
+  putStrLn $ "Solution to Day 3 part 2 is: " ++ show solD3P2
+
+  -- Day 4
+  aolD4P1 <- day4Part1 inputFileTestDay4
+  putStrLn $ "Solution to Day 4 part 1 is: " ++ show aolD4P1
