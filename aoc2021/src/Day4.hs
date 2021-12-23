@@ -3,7 +3,7 @@ module Day4
   )
 where
 
-import Data.List
+import qualified Data.List
 import Data.Matrix
 import Data.Maybe
 
@@ -28,6 +28,15 @@ sumOfMarked bb = sum $ toList $ elementwise (*) (board bb) (matBool2Int $ marked
 sumOfUnmarked :: BingoBoard -> Int
 sumOfUnmarked bb = sum $ toList $ elementwise (*) (board bb) (matBool2Int $ unmarked bb)
 
+checkIfWon :: BingoBoard -> Bool
+checkIfWon (BingoBoard _ m) =
+  let mi = matBool2Int m
+      colSums = multStd mi $ matrix (nrows mi) 1 (\_ -> 1)
+      rowSums = multStd (transpose mi) $ matrix (ncols mi) 1 (\_ -> 1)
+      wonCol = isJust $ elemInMat (ncols mi) colSums
+      wonRow = isJust $ elemInMat (nrows mi) rowSums
+   in wonCol || wonRow
+
 markNumber :: Int -> BingoBoard -> BingoBoard
 markNumber num ob@BingoBoard {board = b, marked = m} =
   let pos = elemInMat num b
@@ -35,10 +44,13 @@ markNumber num ob@BingoBoard {board = b, marked = m} =
         then BingoBoard b (setElem True (fromJust pos) m)
         else ob
 
+markBoards :: Int -> [BingoBoard] -> [BingoBoard]
+markBoards num = map (markNumber num)
+
 elemInMat :: (Eq a) => a -> Matrix a -> Maybe (Int, Int)
 elemInMat x m =
   let ml = toList m
-      lim = elemIndex x ml
+      lim = Data.List.elemIndex x ml
    in if isNothing lim
         then Nothing
         else
