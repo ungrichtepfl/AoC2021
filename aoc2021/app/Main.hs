@@ -7,22 +7,22 @@ import Day3
 -- Inputs
 
 inputFileDay1 :: FilePath
-inputFileDay1 = "input/sonar-sweep.txt"
+inputFileDay1 = "input/1_sonar-sweep.txt"
 
 inputFileTestDay1 :: FilePath
-inputFileTestDay1 = "input/sonar-sweep-test.txt"
+inputFileTestDay1 = "input/1_sonar-sweep-test.txt"
 
 inputFileDay2 :: FilePath
-inputFileDay2 = "input/submarine-trajectory.txt"
+inputFileDay2 = "input/2_submarine-trajectory.txt"
 
 inputFileTestDay2 :: FilePath
-inputFileTestDay2 = "input/submarine-trajectory-test.txt"
+inputFileTestDay2 = "input/2_submarine-trajectory-test.txt"
 
 inputFileDay3 :: FilePath
-inputFileDay3 = "input/gamma-rates.txt"
+inputFileDay3 = "input/3_gamma-rates.txt"
 
 inputFileTestDay3 :: FilePath
-inputFileTestDay3 = "input/gamma-rates-test.txt"
+inputFileTestDay3 = "input/3_gamma-rates-test.txt"
 
 -- Compute solutions to all problems:
 main :: IO ()
