@@ -4,6 +4,8 @@ import Day1
 import Day2
 import Day3
 
+-- Inputs
+
 inputFileDay1 :: FilePath
 inputFileDay1 = "input/sonar-sweep.txt"
 
@@ -22,6 +24,7 @@ inputFileDay3 = "input/gamma-rates.txt"
 inputFileTestDay3 :: FilePath
 inputFileTestDay3 = "input/gamma-rates-test.txt"
 
+-- Compute solutions to all problems:
 main :: IO ()
 main = do
   -- Day 1
@@ -39,5 +42,5 @@ main = do
   solD3P1 <- day3Part1 inputFileDay3
   putStrLn $ "Solution to Day 3 part 1 is: " ++ show solD3P1
 
---  solD3P2 <- day3Part2 inputFileTestDay3
---  putStrLn $ "Solution to Day 2 part 2 is: " ++ show solD3P2
+  solD3P2 <- day3Part2 inputFileDay3
+  putStrLn $ "Solution to Day 3 part 3 is: " ++ show solD3P2
