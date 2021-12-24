@@ -37,7 +37,7 @@ main = do
   -- Day 1
   solD1P1 <- day1Part1 inputFileDay1
   solD1P2 <- day1Part2 inputFileDay1
-  putStr $ unlines ["Solution Day 1 part 1: " ++ show solD1P1, "Solution Day 1 part 2: " ++ show solD1P2]
+  putStr $ unlines ["Solution Day 1 part 1:" ++ show solD1P1, "Solution Day 1 part 2: " ++ show solD1P2]
 
   -- Day 2
   solD2P1 <- day2Part1 inputFileDay2
@@ -53,5 +53,5 @@ main = do
   putStrLn $ "Solution to Day 3 part 2 is: " ++ show solD3P2
 
   -- Day 4
-  aolD4P1 <- day4Part1 inputFileTestDay4
+  aolD4P1 <- day4Part1 inputFileDay4
   putStrLn $ "Solution to Day 4 part 1 is: " ++ show aolD4P1
