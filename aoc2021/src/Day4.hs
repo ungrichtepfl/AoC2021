@@ -62,7 +62,7 @@ sumOfUnmarked bb = sum $ toList $ elementwise (*) (board bb) (matBool2Int $ unma
 getWinner :: BingoNumbers -> [BingoBoard] -> Maybe (BingoNumber, BingoBoard)
 getWinner [] _ = Nothing
 getWinner (num : rest) bbs =
-  let mbbs = map (markNumber num) bbs
+  let mbbs = markBoards num bbs
       bbWon = map checkIfWon mbbs
       idxWon = Data.List.elemIndex True bbWon
    in case idxWon of
