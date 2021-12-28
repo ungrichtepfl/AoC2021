@@ -55,3 +55,6 @@ main = do
   -- Day 4
   aolD4P1 <- day4Part1 inputFileDay4
   putStrLn $ "Solution to Day 4 part 1 is: " ++ show aolD4P1
+
+  aolD4P2 <- day4Part2 inputFileDay4
+  putStrLn $ "Solution to Day 4 part 2 is: " ++ show aolD4P2
