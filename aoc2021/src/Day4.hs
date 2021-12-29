@@ -49,7 +49,7 @@ type BingoNumber = Int
 
 type BingoNumbers = [BingoNumber]
 
--- | File as string input Returnss a list of Bingo numbers and the Bingo Boards
+-- | File as string input returns a list of Bingo numbers and the Bingo Boards
 parseBingoFile :: String -> (BingoNumbers, [BingoBoard])
 parseBingoFile ip =
   let bingoNumbersStr : bingoBoardsStr = lines ip

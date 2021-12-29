@@ -4,6 +4,7 @@ import Day1
 import Day2
 import Day3
 import Day4
+import Day5
 
 -- Inputs
 
@@ -30,6 +31,12 @@ inputFileDay4 = "input/4_bingo.txt"
 
 inputFileTestDay4 :: FilePath
 inputFileTestDay4 = "input/4_bingo-test.txt"
+
+inputFileDay5 :: FilePath
+inputFileDay5 = "input/5_hydro.txt"
+
+inputFileTestDay5 :: FilePath
+inputFileTestDay5 = "input/5_hydro-test.txt"
 
 -- Compute solutions to all problems:
 main :: IO ()
@@ -58,3 +65,10 @@ main = do
 
   aolD4P2 <- day4Part2 inputFileDay4
   putStrLn $ "Solution to Day 4 part 2 is: " ++ show aolD4P2
+  
+  -- Day 5
+  aolD5P1 <- day5Part1 inputFileDay5
+  putStrLn $ "Solution to Day 5 part 1 is: " ++ show aolD5P1
+
+--  aolD5P2 <- day5Part2 inputFileDay5
+--  putStrLn $ "Solution to Day 5 part 2 is: " ++ show aolD5P2
