@@ -41,47 +41,60 @@ inputFileDay5 = "input/5_hydro.txt"
 inputFileTestDay5 :: FilePath
 inputFileTestDay5 = "input/5_hydro-test.txt"
 
+type Solution = (IO Int, IO Int)
+
+solutions :: [Solution]
+solutions =
+  [ ( day1Part1 inputFileDay1,
+      day1Part2 inputFileDay1
+    ),
+    ( day2Part1 inputFileDay2,
+      day2Part2 inputFileDay2
+    ),
+    ( day3Part1 inputFileDay3,
+      day3Part2 inputFileDay3
+    ),
+    ( day4Part1 inputFileDay4,
+      day4Part2 inputFileDay4
+    ),
+    ( day5Part1 inputFileDay5,
+      day5Part2 inputFileDay5
+    )
+  ]
+
 -- Compute solutions to all problems:
 main :: IO ()
-main =
-  getArgs
-    >>= \case
-      ["1"] -> do
-        -- Day 1
-        putStrLn "Start Day 1"
-        solD1P1 <- day1Part1 inputFileDay1
-        putStrLn $ "Solution to Day 1 part 1 is: " ++ show solD1P1
-        solD1P2 <- day1Part2 inputFileDay1
-        putStrLn $ "Solution to Day 1 part 2 is: " ++ show solD1P2
-      ["2"] -> do
-        -- Day 2
-        putStrLn "Start Day 2"
-        solD2P1 <- day2Part1 inputFileDay2
-        putStrLn $ "Solution to Day 2 part 1 is: " ++ show solD2P1
-        solD2P2 <- day2Part2 inputFileDay2
-        putStrLn $ "Solution to Day 2 part 2 is: " ++ show solD2P2
-      ["3"] -> do
-        -- Day 3
-        putStrLn "Start Day 3"
-        solD3P1 <- day3Part1 inputFileDay3
-        putStrLn $ "Solution to Day 3 part 1 is: " ++ show solD3P1
+main = getArgs >>= mainArgs
 
-        solD3P2 <- day3Part2 inputFileDay3
-        putStrLn $ "Solution to Day 3 part 2 is: " ++ show solD3P2
-      ["4"] -> do
-        -- Day 4
-        putStrLn "Start Day 4"
-        aolD4P1 <- day4Part1 inputFileDay4
-        putStrLn $ "Solution to Day 4 part 1 is: " ++ show aolD4P1
+mainArgs :: [String] -> IO ()
+mainArgs args
+  | null args = printSolutions
+  | length args == 1 && head args `elem` map show ([1 .. length solutions] :: [Int]) =
+    let day = read $ head args :: Int
+     in printSolution (day, solutions !! (day - 1))
+  | length args == 2 && head args `elem` map show ([1 .. length solutions] :: [Int]) && last args `elem` ["1", "2"] =
+    let day = read $ head args :: Int
+        part = read $ last args :: Int
+     in if part == 1 then printSolution1 (day, solutions !! (day - 1)) else printSolution2 (day, solutions !! (day -1))
+  | otherwise = do
+    pName <- getProgName
+    putStrLn $ "Usage: stack run " ++ pName ++ " [day_number [part]]."
+    putStrLn "day_number has between 1 and 25 and part either 1 or 2."
+    putStrLn "Not specifing any arguments will print all the available solutions."
 
-        aolD4P2 <- day4Part2 inputFileDay4
-        putStrLn $ "Solution to Day 4 part 2 is: " ++ show aolD4P2
-      ["5"] -> do
-        -- Day 5
-        putStrLn "Start Day 5"
-        aolD5P1 <- day5Part1 inputFileDay5
-        putStrLn $ "Solution to Day 5 part 1 is: " ++ show aolD5P1
+printSolutions :: IO ()
+printSolutions = printRec (1, solutions)
+  where
+    printRec :: (Int, [Solution]) -> IO ()
+    printRec (_, []) = pure ()
+    printRec (i, x : xs) = printSolution (i, x) >> printRec (i + 1, xs)
 
-        aolD5P2 <- day5Part2 inputFileDay5
-        putStrLn $ "Solution to Day 5 part 2 is: " ++ show aolD5P2
-      _ -> putStrLn "Usage: aoc2021-solutions <DayNumber> "
+printSolution :: (Int, Solution) -> IO ()
+printSolution (i, (part1, part2)) =
+  putStrLn ("Day " ++ show i ++ ", Part 1:") >> part1 >>= print >> putStrLn ("Day " ++ show i ++ ", Part 2:") >> part2 >>= print
+
+printSolution1 :: (Int, Solution) -> IO ()
+printSolution1 (i, (part1, _)) = putStrLn ("Day " ++ show i ++ ", Part 1:") >> part1 >>= print
+
+printSolution2 :: (Int, Solution) -> IO ()
+printSolution2 (i, (_, part2)) = putStrLn ("Day " ++ show i ++ ", Part 2:") >> part2 >>= print
