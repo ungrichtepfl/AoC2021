@@ -14,14 +14,20 @@ day5Part1 :: FilePath -> IO Int
 day5Part1 fp = do
   contents <- readFile fp
   let ls = parseLines $ lines contents :: [Line]
-  let finalFloor = markLines (initFloor ls) ls
-  --  putStrLn $ "Final floor:\n" ++ show finalFloor
+  let finalFloor = markLines initFloor ls
+  putStrLn $ "Final floor:\n" ++ show finalFloor
   return $ overlaps 2 finalFloor
 
 day5Part2 :: FilePath -> IO Int
 day5Part2 = undefined
 
-newtype OceanFloor = OceanFloor (Matrix Int) deriving (Show)
+data OceanPoint = OceanPoint
+  { position :: (Int, Int),
+    crossings :: Int
+  }
+  deriving (Show)
+
+newtype OceanFloor = OceanFloor [OceanPoint] deriving (Show)
 
 data Line = Line
   { start :: (Int, Int),
@@ -29,21 +35,34 @@ data Line = Line
   }
   deriving (Show)
 
-initFloor :: [Line] -> OceanFloor
-initFloor ls = OceanFloor $ zero (maxRow + 1) (maxCol + 1)
-  where
-    (maxRow, maxCol) = getMax ls
-    getMax :: [Line] -> (Int, Int)
-    getMax [] = (-1, -1)
-    getMax ((Line (x1, y1) (x2, y2)) : xys) = let (nx, ny) = getMax xys in (maximum [nx, x1, x2], maximum [ny, y1, y2])
+initFloor :: OceanFloor
+initFloor = OceanFloor []
 
 markLines :: OceanFloor -> [Line] -> OceanFloor
 markLines = foldl' markLine
 
+zeroOceanPoint :: (Int, Int) -> OceanPoint
+zeroOceanPoint pos = OceanPoint pos 0
+
 markLine :: OceanFloor -> Line -> OceanFloor
-markLine (OceanFloor m) l = OceanFloor $ mapPos (\(x, y) a -> if (x -1, y -1) `elem` conns then a + 1 else a) m
+markLine oceanFloor l = if null conns then oceanFloor else foldl' addToOceanFloor oceanFloor conns
+  where conns = connection l
+
+addToOceanFloor :: OceanFloor -> (Int, Int) -> OceanFloor
+addToOceanFloor (OceanFloor []) pos = OceanFloor [zeroOceanPoint pos]
+addToOceanFloor (OceanFloor ops) pos =
+  if any (posContained pos) ops
+    then OceanFloor $ addCrossing ops pos
+    else OceanFloor $ zeroOceanPoint pos : ops
   where
-    conns = connection l
+    addCrossing :: [OceanPoint] -> (Int, Int) -> [OceanPoint]
+    addCrossing [] _ = []
+    addCrossing (fop@(OceanPoint pos1 n) : ops') pos2
+      | pos1 == pos2 = OceanPoint pos1 (n + 1) : addCrossing ops' pos2
+      | otherwise = fop : addCrossing ops' pos2
+
+posContained :: (Int, Int) -> OceanPoint -> Bool
+posContained p2 (OceanPoint p1 _) = p1 == p2
 
 connection :: Line -> [(Int, Int)]
 connection (Line (x1, y1) (x2, y2))
@@ -60,4 +79,4 @@ parseLines = map str2line
        in Line (y1, x1) (y2, x2) -- x is column and y is row
 
 overlaps :: Int -> OceanFloor -> Int
-overlaps n (OceanFloor m) = length $ filter (>= n) (toList m)
+overlaps n (OceanFloor ops) = length $ filter (\(OceanPoint _ n') -> n' >= n) ops
