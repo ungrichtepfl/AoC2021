@@ -5,6 +5,7 @@ import Day2
 import Day3
 import Day4
 import Day5
+import Day6
 import System.Environment
 
 -- Inputs
@@ -39,6 +40,12 @@ inputFileDay5 = "input/5_hydro.txt"
 inputFileTestDay5 :: FilePath
 inputFileTestDay5 = "input/5_hydro-test.txt"
 
+inputFileDay6 :: FilePath
+inputFileDay6 = "input/6_lanternfish.txt"
+
+inputFileTestDay6 :: FilePath
+inputFileTestDay6 = "input/6_lanternfish-test.txt"
+
 type Solution = (IO Int, IO Int)
 
 solutions :: [Solution]
@@ -57,6 +64,9 @@ solutions =
     ),
     ( day5Part1 inputFileDay5,
       day5Part2 inputFileDay5
+    ),
+    ( day6Part1 inputFileTestDay6,
+      day6Part2 inputFileTestDay6
     )
   ]
 
@@ -77,7 +87,7 @@ mainArgs args
   | otherwise = do
     pName <- getProgName
     putStrLn $ "Usage: stack run " ++ pName ++ " [day_number [part]]."
-    putStrLn "day_number has between 1 and 25 and part either 1 or 2."
+    putStrLn $ "day_number has between 1 and " ++ show (length solutions) ++ " and part either 1 or 2."
     putStrLn "Not specifing any arguments will print all the available solutions."
 
 printSolutions :: IO ()
