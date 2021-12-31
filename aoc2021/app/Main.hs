@@ -65,7 +65,7 @@ solutions =
     ( day5Part1 inputFileDay5,
       day5Part2 inputFileDay5
     ),
-    ( day6Part1 inputFileTestDay6,
+    ( day6Part1 inputFileDay6,
       day6Part2 inputFileTestDay6
     )
   ]
