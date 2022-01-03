@@ -7,6 +7,7 @@ import Day4
 import Day5
 import Day6
 import Day7
+import Day8
 import System.Environment
 
 -- Inputs
@@ -53,6 +54,12 @@ inputFileDay7 = "input/7_crab_submarine.txt"
 inputFileTestDay7 :: FilePath
 inputFileTestDay7 = "input/7_crab_submarine-test.txt"
 
+inputFileDay8 :: FilePath
+inputFileDay8 = "input/8_seven_segment_displays.txt"
+
+inputFileTestDay8 :: FilePath
+inputFileTestDay8 = "input/8_seven_segment_displays-test.txt"
+
 type Solution = (IO Int, IO Int)
 
 solutions :: [Solution]
@@ -77,6 +84,9 @@ solutions =
     ),
     ( day7Part1 inputFileDay7,
       day7Part2 inputFileDay7
+    ),
+    ( day8Part1 inputFileDay8,
+      day8Part2 inputFileTestDay8
     )
   ]
 
