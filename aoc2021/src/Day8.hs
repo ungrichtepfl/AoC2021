@@ -19,28 +19,21 @@ type Patterns = [String]
 
 type Digits = [String]
 
-newtype Signal = Signal ([Patterns], [Digits]) deriving (Show)
+newtype Signal = Signal (Patterns, Digits) deriving (Show)
 
 type SignalLength = Int
 
-countLength :: [SignalLength] -> Signal -> Int
-countLength _ (Signal (_, [])) = 0
-countLength ls (Signal (ps, d : ds)) = length (filter (`elem` ls) (digitLengts d)) + countLength ls (Signal (ps, ds))
+countLength :: [SignalLength] -> [Signal] -> Int
+countLength _ [] = 0
+countLength ls (Signal (_, dig) : sgns) = length (filter (`elem` ls) (digitLengts dig)) + countLength ls sgns
 
 digitLengts :: Digits -> [Int]
 digitLengts = map length
 
-parseInput :: String -> Signal
-parseInput ip = Signal $ parseLines (lines ip)
+parseInput :: String -> [Signal]
+parseInput ip = map parseLine (lines ip)
 
-parseLines :: [String] -> ([Patterns], [Digits])
-parseLines [] = ([], [])
-parseLines (l : lns) =
-  let (pat, digit) = parseLine l
-      (patNex, digitNex) = parseLines lns
-   in (pat : patNex, digit : digitNex)
-
-parseLine :: String -> (Patterns, Digits)
+parseLine :: String -> Signal
 parseLine l =
   let [pat, digit] = (map words . splitOn " | ") l
-   in (pat, digit)
+   in Signal (pat, digit)
