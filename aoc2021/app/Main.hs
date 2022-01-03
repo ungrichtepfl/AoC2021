@@ -80,10 +80,32 @@ solutions =
     )
   ]
 
--- Compute solutions to all problems:
+-- | Print all the solutions in the solutions list
+printSolutions :: IO ()
+printSolutions = printRec (1, solutions)
+  where
+    printRec :: (Int, [Solution]) -> IO ()
+    printRec (_, []) = pure ()
+    printRec (i, x : xs) = printSolution (i, x) >> printRec (i + 1, xs)
+
+-- | Print part 1 and part 2 of one solution (of a day)
+printSolution :: (Int, Solution) -> IO ()
+printSolution (i, (part1, part2)) =
+  putStrLn ("Day " ++ show i ++ ", Part 1:") >> part1 >>= print >> putStrLn ("Day " ++ show i ++ ", Part 2:") >> part2 >>= print
+
+-- | Print part 1 of one solution (of a day)
+printSolution1 :: (Int, Solution) -> IO ()
+printSolution1 (i, (part1, _)) = putStrLn ("Day " ++ show i ++ ", Part 1:") >> part1 >>= print
+
+-- | Print part 2 of one solution (of a day)
+printSolution2 :: (Int, Solution) -> IO ()
+printSolution2 (i, (_, part2)) = putStrLn ("Day " ++ show i ++ ", Part 2:") >> part2 >>= print
+
+-- | Entry Point
 main :: IO ()
 main = getArgs >>= mainArgs
 
+-- |
 mainArgs :: [String] -> IO ()
 mainArgs args
   | null args = printSolutions
@@ -96,23 +118,6 @@ mainArgs args
      in if part == 1 then printSolution1 (day, solutions !! (day - 1)) else printSolution2 (day, solutions !! (day -1))
   | otherwise = do
     pName <- getProgName
-    putStrLn $ "Usage: stack run " ++ pName ++ " [day_number [part]]."
-    putStrLn $ "day_number has between 1 and " ++ show (length solutions) ++ " and part either 1 or 2."
+    putStrLn $ "Usage: stack run " ++ pName ++ " [day [part]]."
+    putStrLn $ "day has to be between 1 and " ++ show (length solutions) ++ " and part either 1 or 2."
     putStrLn "Not specifing any arguments will print all the available solutions."
-
-printSolutions :: IO ()
-printSolutions = printRec (1, solutions)
-  where
-    printRec :: (Int, [Solution]) -> IO ()
-    printRec (_, []) = pure ()
-    printRec (i, x : xs) = printSolution (i, x) >> printRec (i + 1, xs)
-
-printSolution :: (Int, Solution) -> IO ()
-printSolution (i, (part1, part2)) =
-  putStrLn ("Day " ++ show i ++ ", Part 1:") >> part1 >>= print >> putStrLn ("Day " ++ show i ++ ", Part 2:") >> part2 >>= print
-
-printSolution1 :: (Int, Solution) -> IO ()
-printSolution1 (i, (part1, _)) = putStrLn ("Day " ++ show i ++ ", Part 1:") >> part1 >>= print
-
-printSolution2 :: (Int, Solution) -> IO ()
-printSolution2 (i, (_, part2)) = putStrLn ("Day " ++ show i ++ ", Part 2:") >> part2 >>= print
