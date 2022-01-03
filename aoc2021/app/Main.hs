@@ -76,7 +76,7 @@ solutions =
       day6Part2 inputFileDay6
     ),
     ( day7Part1 inputFileDay7,
-      day7Part2 inputFileTestDay7
+      day7Part2 inputFileDay7
     )
   ]
 
