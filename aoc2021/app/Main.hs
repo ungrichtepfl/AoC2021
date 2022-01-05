@@ -96,7 +96,7 @@ solutions =
       day8Part2 inputFileDay8
     ),
     ( day9Part1 inputFileDay9,
-      day9Part2 inputFileTestDay9
+      day9Part2 inputFileDay9
     )
   ]
 
