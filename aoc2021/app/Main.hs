@@ -95,7 +95,7 @@ solutions =
     ( day8Part1 inputFileDay8,
       day8Part2 inputFileDay8
     ),
-    ( day9Part1 inputFileTestDay9,
+    ( day9Part1 inputFileDay9,
       day9Part2 inputFileTestDay9
     )
   ]
