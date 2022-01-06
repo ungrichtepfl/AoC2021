@@ -1,0 +1,40 @@
+#! /usr/bin/env python3
+
+import sys
+import os
+
+INPUT_DIR = "input"
+SRC_DIR = "src"
+
+if __name__ == "__main__":
+    assert len(sys.argv) == 3, "Number of arguments must be 2: day_number input_file_name."
+    day: str = sys.argv[1]
+    input_file_name: str = f"{day}_{sys.argv[2]}.txt"
+    input_test_file_name: str = f"{day}_{sys.argv[2]}-test.txt"
+
+    src_file_name: str = f"Day{day}.hs"
+
+    with open(os.path.join(INPUT_DIR, input_file_name), 'w'):
+        pass
+
+    with open(os.path.join(INPUT_DIR, input_test_file_name), 'w'):
+        pass
+    src_txt: str = \
+        f"""module Day{day}
+  ( day{day}Part1,
+    day{day}Part2,
+  )
+where
+
+day{day}Part1 :: FilePath -> IO Int
+day{day}Part1 fp = do
+  contents <- readFile fp
+  return $ -1
+
+day{day}Part2 :: FilePath -> IO Int
+day{day}Part2 fp = do
+  contents <- readFile fp
+  return $ -1
+"""
+    with open(os.path.join(SRC_DIR, src_file_name), 'w') as f:
+        f.write(src_txt)
