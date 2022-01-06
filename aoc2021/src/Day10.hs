@@ -42,13 +42,13 @@ manipulateStack (b@(Brackets p s c a), unmached) x = case x of
   ')' -> case pop p of
     Just p' -> (b {parenthesis = p'}, unmached)
     Nothing -> (b, (getExpected b, ')') : unmached)
-  ']' -> case pop p of
+  ']' -> case pop s of
     Just s' -> (b {square = s'}, unmached)
     Nothing -> (b, (getExpected b, ']') : unmached)
-  '}' -> case pop p of
+  '}' -> case pop c of
     Just c' -> (b {curly = c'}, unmached)
     Nothing -> (b, (getExpected b, '}') : unmached)
-  '>' -> case pop p of
+  '>' -> case pop a of
     Just a' -> (b {angle = a'}, unmached)
     Nothing -> (b, (getExpected b, '>') : unmached)
   _ -> error "Wrong bracket."
