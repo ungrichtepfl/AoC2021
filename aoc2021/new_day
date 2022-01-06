@@ -14,11 +14,15 @@ if __name__ == "__main__":
 
     src_file_name: str = f"Day{day}.hs"
 
+    # create empty input file
     with open(os.path.join(INPUT_DIR, input_file_name), 'w'):
         pass
 
+    # create empty test input file
     with open(os.path.join(INPUT_DIR, input_test_file_name), 'w'):
         pass
+
+    # haskell source text
     src_txt: str = \
         f"""module Day{day}
   ( day{day}Part1,
@@ -36,5 +40,7 @@ day{day}Part2 fp = do
   contents <- readFile fp
   return $ -1
 """
+
+    # write haskell source file
     with open(os.path.join(SRC_DIR, src_file_name), 'w') as f:
         f.write(src_txt)
