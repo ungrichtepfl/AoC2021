@@ -1,13 +1,13 @@
-module Day3
-  ( day3Part1,
-    day3Part2,
+module Day03
+  ( day03Part1,
+    day03Part2,
   )
 where
 
 import Data.List (foldl')
 
-day3Part1 :: FilePath -> IO Int
-day3Part1 fp = do
+day03Part1 :: FilePath -> IO Int
+day03Part1 fp = do
   contents <- readFile fp
   let contentLines = lines contents
   let nbLines = length contentLines
@@ -17,8 +17,8 @@ day3Part1 fp = do
   putStrLn $ "Epsilon Rate: " ++ concatMap show epsilonRate
   return $ toDec gammaRate * toDec epsilonRate
 
-day3Part2 :: FilePath -> IO Int
-day3Part2 fp = do
+day03Part2 :: FilePath -> IO Int
+day03Part2 fp = do
   contents <- readFile fp
   let contentLines = lines contents
   let nbLines = length contentLines

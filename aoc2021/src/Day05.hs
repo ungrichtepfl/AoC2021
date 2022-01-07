@@ -1,6 +1,6 @@
-module Day5
-  ( day5Part1,
-    day5Part2,
+module Day05
+  ( day05Part1,
+    day05Part2,
   )
 where
 
@@ -8,16 +8,16 @@ import Data.List.Split (splitOn)
 
 --import qualified Debug.Trace as Dt
 
-day5Part1 :: FilePath -> IO Int
-day5Part1 fp = do
+day05Part1 :: FilePath -> IO Int
+day05Part1 fp = do
   contents <- readFile fp
   let ls = parseLines $ lines contents :: [Line]
   let finalFloor = markLines1 initFloor ls
   --  putStrLn $ "Final floor:\n" ++ show finalFloor
   return $ overlaps 2 finalFloor
 
-day5Part2 :: FilePath -> IO Int
-day5Part2 fp = do
+day05Part2 :: FilePath -> IO Int
+day05Part2 fp = do
   contents <- readFile fp
   let ls = parseLines $ lines contents :: [Line]
   let finalFloor = markLines2 initFloor ls

@@ -1,6 +1,6 @@
-module Day9
-  ( day9Part1,
-    day9Part2,
+module Day09
+  ( day09Part1,
+    day09Part2,
   )
 where
 
@@ -10,8 +10,8 @@ import Data.Matrix
 
 --import qualified Debug.Trace as DB
 
-day9Part1 :: FilePath -> IO Int
-day9Part1 fp = do
+day09Part1 :: FilePath -> IO Int
+day09Part1 fp = do
   contents <- readFile fp
   let mat = parseInput contents
   --  print mat
@@ -19,8 +19,8 @@ day9Part1 fp = do
   --  print locMin
   (return . sum . toList . elementwise (\a b -> (a + 1) * fromEnum b) mat) locMin
 
-day9Part2 :: FilePath -> IO Int
-day9Part2 fp = do
+day09Part2 :: FilePath -> IO Int
+day09Part2 fp = do
   contents <- readFile fp
   let mat = parseInput contents
   let locMinIdxs = (elemIndicesMat True . localMinima1) mat

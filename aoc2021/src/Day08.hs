@@ -1,6 +1,6 @@
-module Day8
-  ( day8Part1,
-    day8Part2,
+module Day08
+  ( day08Part1,
+    day08Part2,
   )
 where
 
@@ -8,14 +8,14 @@ import Data.List (sort)
 import Data.List.Split (splitOn)
 import qualified Data.Map as Map
 
-day8Part1 :: FilePath -> IO Int
-day8Part1 fp = do
+day08Part1 :: FilePath -> IO Int
+day08Part1 fp = do
   contents <- readFile fp
   let sigs = parseInput contents
   return $ countLength [2, 3, 4, 7] sigs
 
-day8Part2 :: FilePath -> IO Int
-day8Part2 fp = do
+day08Part2 :: FilePath -> IO Int
+day08Part2 fp = do
   contents <- readFile fp
   let sigs = parseInput contents
   let nums = deduceAll sigs

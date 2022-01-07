@@ -1,19 +1,19 @@
-module Day7
-  ( day7Part1,
-    day7Part2,
+module Day07
+  ( day07Part1,
+    day07Part2,
   )
 where
 
 import Data.List (sort)
 import Data.List.Split (splitOn)
 
-day7Part1 :: FilePath -> IO Int
-day7Part1 fp = do
+day07Part1 :: FilePath -> IO Int
+day07Part1 fp = do
   contents <- readFile fp
   return $ syncCrabs $ parseInput contents
 
-day7Part2 :: FilePath -> IO Int
-day7Part2 fp = do
+day07Part2 :: FilePath -> IO Int
+day07Part2 fp = do
   contents <- readFile fp
   return $ syncCrabs1 $ parseInput contents
 

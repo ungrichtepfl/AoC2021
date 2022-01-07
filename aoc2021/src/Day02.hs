@@ -1,13 +1,13 @@
-module Day2
-  ( day2Part1,
-    day2Part2,
+module Day02
+  ( day02Part1,
+    day02Part2,
   )
 where
 
 data SubAction = Up Int | Down Int | Forward Int deriving (Show)
 
-day2Part1 :: FilePath -> IO Int
-day2Part1 filePath = do
+day02Part1 :: FilePath -> IO Int
+day02Part1 filePath = do
   contents <- readFile filePath
   let subActions = parseInput contents
   let (horizontal, depth) = horizonalDepthStartZero subActions
@@ -15,8 +15,8 @@ day2Part1 filePath = do
   putStrLn $ "Depth is: " ++ show depth
   return $ horizontal * depth
 
-day2Part2 :: FilePath -> IO Int
-day2Part2 filePath = do
+day02Part2 :: FilePath -> IO Int
+day02Part2 filePath = do
   contents <- readFile filePath
   let subActions = parseInput contents
   let (horizontal, depth, aim) = horizonalDepthAimStartZero subActions

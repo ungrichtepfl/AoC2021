@@ -1,6 +1,6 @@
-module Day4
-  ( day4Part1,
-    day4Part2,
+module Day04
+  ( day04Part1,
+    day04Part2,
   )
 where
 
@@ -9,8 +9,8 @@ import Data.List.Split (splitOn)
 import Data.Matrix
 import Data.Maybe
 
-day4Part1 :: FilePath -> IO Int
-day4Part1 fp = do
+day04Part1 :: FilePath -> IO Int
+day04Part1 fp = do
   contents <- readFile fp
   let (bingoNumbers, bingoBoards) = parseBingoFile contents
   let (winNum, winBoard) = case getWinner bingoNumbers bingoBoards of
@@ -21,8 +21,8 @@ day4Part1 fp = do
   putStrLn $ "Winner number: " ++ show winNum
   return $ winNum * sumOfUnmarked winBoard
 
-day4Part2 :: FilePath -> IO Int
-day4Part2 fp = do
+day04Part2 :: FilePath -> IO Int
+day04Part2 fp = do
   contents <- readFile fp
   let (bingoNumbers, bingoBoards) = parseBingoFile contents
   let (winNum, winBoard) = case getLastWinner bingoNumbers bingoBoards of

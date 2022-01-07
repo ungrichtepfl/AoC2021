@@ -1,112 +1,112 @@
 module Main where
 
-import Day1
-import Day2
-import Day3
-import Day4
-import Day5
-import Day6
-import Day7
-import Day8
-import Day9
+import Day01
+import Day02
+import Day03
+import Day04
+import Day05
+import Day06
+import Day07
+import Day08
+import Day09
 import Day10
 import System.Environment
 
 -- Inputs
 
-inputFileDay1 :: FilePath
-inputFileDay1 = "input/1_sonar-sweep.txt"
+inputDay01 :: FilePath
+inputDay01 = "input/01_sonar-sweep.txt"
 
-inputFileTestDay1 :: FilePath
-inputFileTestDay1 = "input/1_sonar-sweep-test.txt"
+sampleDay01 :: FilePath
+sampleDay01 = "input/01_sonar-sweep-test.txt"
 
-inputFileDay2 :: FilePath
-inputFileDay2 = "input/2_submarine-trajectory.txt"
+inputDay02 :: FilePath
+inputDay02 = "input/02_submarine-trajectory.txt"
 
-inputFileTestDay2 :: FilePath
-inputFileTestDay2 = "input/2_submarine-trajectory-test.txt"
+sampleDay02 :: FilePath
+sampleDay02 = "input/02_submarine-trajectory-test.txt"
 
-inputFileDay3 :: FilePath
-inputFileDay3 = "input/3_gamma-rates.txt"
+inputDay03 :: FilePath
+inputDay03 = "input/03_gamma-rates.txt"
 
-inputFileTestDay3 :: FilePath
-inputFileTestDay3 = "input/3_gamma-rates-test.txt"
+sampleDay03 :: FilePath
+sampleDay03 = "input/03_gamma-rates-test.txt"
 
-inputFileDay4 :: FilePath
-inputFileDay4 = "input/4_bingo.txt"
+inputDay04 :: FilePath
+inputDay04 = "input/04_bingo.txt"
 
-inputFileTestDay4 :: FilePath
-inputFileTestDay4 = "input/4_bingo-test.txt"
+sampleDay04 :: FilePath
+sampleDay04 = "input/04_bingo-test.txt"
 
-inputFileDay5 :: FilePath
-inputFileDay5 = "input/5_hydro.txt"
+inputDay05 :: FilePath
+inputDay05 = "input/05_hydro.txt"
 
-inputFileTestDay5 :: FilePath
-inputFileTestDay5 = "input/5_hydro-test.txt"
+sampleDay05 :: FilePath
+sampleDay05 = "input/05_hydro-test.txt"
 
-inputFileDay6 :: FilePath
-inputFileDay6 = "input/6_lanternfish.txt"
+inputDay06 :: FilePath
+inputDay06 = "input/06_lanternfish.txt"
 
-inputFileTestDay6 :: FilePath
-inputFileTestDay6 = "input/6_lanternfish-test.txt"
+sampleDay06 :: FilePath
+sampleDay06 = "input/06_lanternfish-test.txt"
 
-inputFileDay7 :: FilePath
-inputFileDay7 = "input/7_crab_submarine.txt"
+inputDay07 :: FilePath
+inputDay07 = "input/07_crab_submarine.txt"
 
-inputFileTestDay7 :: FilePath
-inputFileTestDay7 = "input/7_crab_submarine-test.txt"
+sampleDay07 :: FilePath
+sampleDay07 = "input/07_crab_submarine-test.txt"
 
-inputFileDay8 :: FilePath
-inputFileDay8 = "input/8_seven_segment_displays.txt"
+inputDay08 :: FilePath
+inputDay08 = "input/08_seven_segment_displays.txt"
 
-inputFileTestDay8 :: FilePath
-inputFileTestDay8 = "input/8_seven_segment_displays-test.txt"
+sampleDay08 :: FilePath
+sampleDay08 = "input/08_seven_segment_displays-test.txt"
 
-inputFileDay9 :: FilePath
-inputFileDay9 = "input/9_low_points.txt"
+inputDay09 :: FilePath
+inputDay09 = "input/09_low_points.txt"
 
-inputFileTestDay9 :: FilePath
-inputFileTestDay9 = "input/9_low_points-test.txt"
+sampleDay09 :: FilePath
+sampleDay09 = "input/09_low_points-test.txt"
 
-inputFileDay10 :: FilePath
-inputFileDay10 = "input/10_syntax_scoring.txt"
+inputDay10 :: FilePath
+inputDay10 = "input/10_syntax_scoring.txt"
 
-inputFileTestDay10 :: FilePath
-inputFileTestDay10 = "input/10_syntax_scoring-test.txt"
+sampleDay10 :: FilePath
+sampleDay10 = "input/10_syntax_scoring-test.txt"
 
 type Solution = (IO Int, IO Int)
 
 solutions :: [Solution]
 solutions =
-  [ ( day1Part1 inputFileDay1,
-      day1Part2 inputFileDay1
+  [ ( day01Part1 inputDay01,
+      day01Part2 inputDay01
     ),
-    ( day2Part1 inputFileDay2,
-      day2Part2 inputFileDay2
+    ( day02Part1 inputDay02,
+      day02Part2 inputDay02
     ),
-    ( day3Part1 inputFileDay3,
-      day3Part2 inputFileDay3
+    ( day03Part1 inputDay03,
+      day03Part2 inputDay03
     ),
-    ( day4Part1 inputFileDay4,
-      day4Part2 inputFileDay4
+    ( day04Part1 inputDay04,
+      day04Part2 inputDay04
     ),
-    ( day5Part1 inputFileDay5,
-      day5Part2 inputFileDay5
+    ( day05Part1 inputDay05,
+      day05Part2 inputDay05
     ),
-    ( day6Part1 inputFileDay6,
-      day6Part2 inputFileDay6
+    ( day06Part1 inputDay06,
+      day06Part2 inputDay06
     ),
-    ( day7Part1 inputFileDay7,
-      day7Part2 inputFileDay7
+    ( day07Part1 inputDay07,
+      day07Part2 inputDay07
     ),
-    ( day8Part1 inputFileDay8,
-      day8Part2 inputFileDay8
+    ( day08Part1 inputDay08,
+      day08Part2 inputDay08
     ),
-    ( day9Part1 inputFileDay9,
-      day9Part2 inputFileDay9
+    ( day09Part1 inputDay09,
+      day09Part2 inputDay09
     ),
-    ( day10Part1 inputFileTestDay10,
-      day10Part2 inputFileTestDay10
+    ( day10Part1 sampleDay10,
+      day10Part2 sampleDay10
     )
   ]
 
@@ -135,7 +135,7 @@ printSolution2 (i, (_, part2)) = putStrLn ("Day " ++ show i ++ ", Part 2:") >> p
 main :: IO ()
 main = getArgs >>= mainArgs
 
--- |
+-- | run different solutions based on list of arguments given.
 mainArgs :: [String] -> IO ()
 mainArgs args
   | null args = printSolutions

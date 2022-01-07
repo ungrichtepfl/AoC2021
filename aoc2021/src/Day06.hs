@@ -1,19 +1,19 @@
-module Day6
-  ( day6Part1,
-    day6Part2,
+module Day06
+  ( day06Part1,
+    day06Part2,
   )
 where
 
 import Data.List.Split (splitOn)
 
-day6Part1 :: FilePath -> IO Int
-day6Part1 fp = do
+day06Part1 :: FilePath -> IO Int
+day06Part1 fp = do
   contents <- readFile fp
   let fishList = getFishList contents
   return $ fishAfterN 80 fishList
 
-day6Part2 :: FilePath -> IO Int
-day6Part2 fp = do
+day06Part2 :: FilePath -> IO Int
+day06Part2 fp = do
   contents <- readFile fp
   let fishList = getFishList contents
   return $ fishAfterNFPD 256 $ initFPD fishList
