@@ -16,7 +16,7 @@ if __name__ == "__main__":
         day = "0" + day
 
     input_file_name: str = f"{day}_{sys.argv[2]}.txt"
-    input_test_file_name: str = f"{day}_{sys.argv[2]}-test.txt"
+    input_test_file_name: str = f"{day}_{sys.argv[2]}-sample.txt"
 
     src_file_name: str = f"Day{day}.hs"
 

@@ -23,61 +23,61 @@ inputDay01 :: FilePath
 inputDay01 = "input/01_sonar-sweep.txt"
 
 sampleDay01 :: FilePath
-sampleDay01 = "input/01_sonar-sweep-test.txt"
+sampleDay01 = "input/01_sonar-sweep-sample.txt"
 
 inputDay02 :: FilePath
 inputDay02 = "input/02_submarine-trajectory.txt"
 
 sampleDay02 :: FilePath
-sampleDay02 = "input/02_submarine-trajectory-test.txt"
+sampleDay02 = "input/02_submarine-trajectory-sample.txt"
 
 inputDay03 :: FilePath
 inputDay03 = "input/03_gamma-rates.txt"
 
 sampleDay03 :: FilePath
-sampleDay03 = "input/03_gamma-rates-test.txt"
+sampleDay03 = "input/03_gamma-rates-sample.txt"
 
 inputDay04 :: FilePath
 inputDay04 = "input/04_bingo.txt"
 
 sampleDay04 :: FilePath
-sampleDay04 = "input/04_bingo-test.txt"
+sampleDay04 = "input/04_bingo-sample.txt"
 
 inputDay05 :: FilePath
 inputDay05 = "input/05_hydro.txt"
 
 sampleDay05 :: FilePath
-sampleDay05 = "input/05_hydro-test.txt"
+sampleDay05 = "input/05_hydro-sample.txt"
 
 inputDay06 :: FilePath
 inputDay06 = "input/06_lanternfish.txt"
 
 sampleDay06 :: FilePath
-sampleDay06 = "input/06_lanternfish-test.txt"
+sampleDay06 = "input/06_lanternfish-sample.txt"
 
 inputDay07 :: FilePath
 inputDay07 = "input/07_crab_submarine.txt"
 
 sampleDay07 :: FilePath
-sampleDay07 = "input/07_crab_submarine-test.txt"
+sampleDay07 = "input/07_crab_submarine-sample.txt"
 
 inputDay08 :: FilePath
 inputDay08 = "input/08_seven_segment_displays.txt"
 
 sampleDay08 :: FilePath
-sampleDay08 = "input/08_seven_segment_displays-test.txt"
+sampleDay08 = "input/08_seven_segment_displays-sample.txt"
 
 inputDay09 :: FilePath
 inputDay09 = "input/09_low_points.txt"
 
 sampleDay09 :: FilePath
-sampleDay09 = "input/09_low_points-test.txt"
+sampleDay09 = "input/09_low_points-sample.txt"
 
 inputDay10 :: FilePath
 inputDay10 = "input/10_syntax_scoring.txt"
 
 sampleDay10 :: FilePath
-sampleDay10 = "input/10_syntax_scoring-test.txt"
+sampleDay10 = "input/10_syntax_scoring-sample.txt"
 
 type Solution = (IO Int, IO Int)
 
