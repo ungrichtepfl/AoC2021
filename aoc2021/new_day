@@ -2,13 +2,19 @@
 
 import sys
 import os
+from typing import List
 
-INPUT_DIR = "input"
-SRC_DIR = "src"
+INPUT_DIR: str = "input"
+SRC_DIR: str = "src"
+MAIN_DIR: str = "app"
+MAIN_FILE_NAME: str = "Main.hs"
 
 if __name__ == "__main__":
     assert len(sys.argv) == 3, "Number of arguments must be 2: day_number input_file_name."
     day: str = sys.argv[1]
+    if len(day) == 1:
+        day = "0" + day
+
     input_file_name: str = f"{day}_{sys.argv[2]}.txt"
     input_test_file_name: str = f"{day}_{sys.argv[2]}-test.txt"
 
@@ -44,3 +50,39 @@ day{day}Part2 fp = do
     # write haskell source file
     with open(os.path.join(SRC_DIR, src_file_name), 'w') as f:
         f.write(src_txt)
+
+    with open(os.path.join(MAIN_DIR, MAIN_FILE_NAME), 'r') as f:
+        content: List[str] = f.read()
+
+    new_contents: List[str] = []
+
+    with open(os.path.join(MAIN_DIR, MAIN_FILE_NAME), 'r+') as f:
+        for line in content.splitlines():
+            if "System.Environment" in line:
+                new_contents.append(f"import Day{day}")
+            elif "type Solution" in line:
+                new_contents.extend(
+                    [
+                        f"inputDay{day} :: FilePath",
+                        f"inputDay{day} = \"{INPUT_DIR}/{input_file_name}\"",
+                        f"",
+                        f"sampleDay{day} :: FilePath",
+                        f"sampleDay{day} = \"{INPUT_DIR}/{input_file_name}\"",
+                        f""
+                    ]
+                )
+            elif "printSolutions :: IO ()" in line:
+                # add comma:
+                new_contents[-4] = new_contents[-4] + ","
+                to_insert: List[str] = [
+                    f"    ( day{day}Part1 sampleDay{day},",
+                    f"      day{day}Part2 sampleDay{day}",
+                    f"    )"
+                ]
+                for s in to_insert:
+                    new_contents.insert(len(new_contents) - 3, s)
+
+            new_contents.append(line)
+
+        to_write = '\n'.join(new_contents) + '\n'
+        f.writelines(to_write)
