@@ -1,8 +1,8 @@
 module Main where
 
 {-
-This file will be automatically updated with the function 'new_day day_number input_file_name'.
-Be carefull when updating the main function by hand. It may break the function new_day.
+This file will be automatically updated with the function `new_day day_number input_file_name`.
+Be careful when updating the main function by hand. It may break the function `new_day`.
 -}
 
 import Day01
