@@ -84,7 +84,7 @@ inputDay11 :: FilePath
 inputDay11 = "input/11_dumbo-octopuses.txt"
 
 sampleDay11 :: FilePath
-sampleDay11 = "input/11_dumbo-octopuses.txt"
+sampleDay11 = "input/11_dumbo-octopuses-sample.txt"
 
 type Solution = (IO Int, IO Int)
 
