@@ -112,7 +112,7 @@ day{day}Part2 fp = do
                         f"inputDay{day} = \"{INPUT_DIR}/{input_file_name}\"",
                         f"",
                         f"sampleDay{day} :: FilePath",
-                        f"sampleDay{day} = \"{INPUT_DIR}/{input_file_name}\"",
+                        f"sampleDay{day} = \"{INPUT_DIR}/{sample_file_name}\"",
                         f""
                     ]
                 )
