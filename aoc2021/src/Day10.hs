@@ -4,67 +4,85 @@ module Day10
   )
 where
 
-import Control.Monad (foldM)
-import Data.List (foldl')
-
 day10Part1 :: FilePath -> IO Int
 day10Part1 fp = do
   contents <- readFile fp
-  print . parseInputs $ contents
-  return $ -1
+  let chunks = parseInputs contents
+  let checkedChunks = map (checkChunk []) chunks
+  --  printErrors checkedChunks
+  return $ calculateScore checkedChunks
 
 day10Part2 :: FilePath -> IO Int
 day10Part2 fp = do
   contents <- readFile fp
   return $ -1
 
-type Chunk = String
+type Bracket = Char
 
-type Stack = Int
+type Chunk = [Bracket]
 
-data Brackets = Brackets
-  { parenthesis :: Stack,
-    square :: Stack,
-    curly :: Stack,
-    angle :: Stack
-  }
-  deriving (Show)
+type Stack = [Bracket]
 
-checkChunk :: Chunk -> [(Char, Char)]
-checkChunk c = snd $ foldl' manipulateStack (Brackets 0 0 0 0, []) c
+open :: [Bracket]
+open =
+  [ '{',
+    '(',
+    '<',
+    '['
+  ]
 
-manipulateStack :: (Brackets, [(Char, Char)]) -> Char -> (Brackets, [(Char, Char)])
-manipulateStack (b@(Brackets p s c a), unmached) x = case x of
-  '(' -> (b {parenthesis = push p}, unmached)
-  '[' -> (b {square = push s}, unmached)
-  '{' -> (b {curly = push c}, unmached)
-  '<' -> (b {angle = push a}, unmached)
-  ')' -> case pop p of
-    Just p' -> (b {parenthesis = p'}, unmached)
-    Nothing -> (b, (getExpected b, ')') : unmached)
-  ']' -> case pop s of
-    Just s' -> (b {square = s'}, unmached)
-    Nothing -> (b, (getExpected b, ']') : unmached)
-  '}' -> case pop c of
-    Just c' -> (b {curly = c'}, unmached)
-    Nothing -> (b, (getExpected b, '}') : unmached)
-  '>' -> case pop a of
-    Just a' -> (b {angle = a'}, unmached)
-    Nothing -> (b, (getExpected b, '>') : unmached)
-  _ -> error "Wrong bracket."
-  where
-    getExpected (Brackets p' s' c' a')
-      | p' > 0 = ')'
-      | s' > 0 = ']'
-      | c' > 0 = '}'
-      | a' > 0 = '>'
-      | otherwise = error "Unreachable"
+closed :: [Bracket]
+closed =
+  [ '}',
+    ')',
+    '>',
+    ']'
+  ]
 
-pop :: Stack -> Maybe Stack
-pop s = if s == 0 then Nothing else Just $ s - 1
+calculateScore :: [Either (Bracket, Bracket) Stack] -> Int
+calculateScore [] = 0
+calculateScore ((Right _) : rest) = calculateScore rest
+calculateScore ((Left (_, found)) : rest) = case found of
+  ')' -> 3 + calculateScore rest
+  ']' -> 57 + calculateScore rest
+  '}' -> 1197 + calculateScore rest
+  '>' -> 25137 + calculateScore rest
+  _ -> error $ "Wrong kind of bracket: " ++ show found
 
-push :: Stack -> Stack
-push = (1 +)
+printErrors :: [Either (Bracket, Bracket) Stack] -> IO ()
+printErrors [] = return ()
+printErrors ((Left (expected, found)) : rest) = putStrLn ("Expected " ++ show expected ++ ", but found " ++ show found ++ " instead.") >> printErrors rest
+printErrors ((Right _) : rest) = printErrors rest
+
+checkChunk :: Stack -> Chunk -> Either (Bracket, Bracket) Stack
+checkChunk s [] = Right s
+checkChunk s (b : bs)
+  | b `elem` open = checkChunk (push s b) bs
+  | b `elem` closed = case pop s b of
+    Right ns -> checkChunk ns bs
+    ef -> ef
+  | otherwise = error $ "Wrong kind of bracket. " ++ show b
+
+pop :: Stack -> Bracket -> Either (Bracket, Bracket) Stack
+pop [] found = Left (flipBracket found, found)
+pop (toclose : s) found
+  | flipBracket toclose == found = Right s
+  | otherwise = Left (flipBracket toclose, found)
+
+flipBracket :: Bracket -> Bracket
+flipBracket c = case c of
+  '(' -> ')'
+  ')' -> '('
+  '{' -> '}'
+  '}' -> '{'
+  '<' -> '>'
+  '>' -> '<'
+  '[' -> ']'
+  ']' -> '['
+  _ -> error $ "Wrong bracket: " ++ show c
+
+push :: Stack -> Bracket -> Stack
+push s = (: s)
 
 parseInputs :: String -> [Chunk]
 parseInputs = lines
