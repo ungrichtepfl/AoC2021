@@ -25,8 +25,32 @@ def write_file(file_path: str, contents: str = "", force: bool = False):
             f.write(contents)
 
 
+def print_usage():
+    usage: str = """. Usage:
+.  newday day name
+.
+.  Positional arguments:
+.   day        day number as an integer
+.   name       name of the input file to create
+"""
+    print(usage)
+
+
 if __name__ == "__main__":
-    assert len(sys.argv) == 3, "Number of arguments must be 2: day_number input_file_name."
+
+    # parse inputs
+    if len(sys.argv) != 3:
+        print("Wrong number of arguments.")
+        print_usage()
+        exit()
+
+    try:
+        int(sys.argv[1])
+    except ValueError:
+        print("First input value has to be an integer.")
+        print_usage()
+        exit()
+
     day: str = sys.argv[1]
     if len(day) == 1:
         day = "0" + day

@@ -152,7 +152,15 @@ mainArgs args
         part = read $ last args :: Int
      in if part == 1 then printSolution1 (day, solutions !! (day - 1)) else printSolution2 (day, solutions !! (day -1))
   | otherwise = do
+    putStrLn "Wrong arguments given."
     pName <- getProgName
-    putStrLn $ "Usage: stack run " ++ pName ++ " [day [part]]."
-    putStrLn $ "day has to be between 1 and " ++ show (length solutions) ++ " and part either 1 or 2."
-    putStrLn "Not specifing any arguments will print all the available solutions."
+    let usage =
+          [ ". Usage: stack run " ++ pName ++ " [day [part]].",
+            ".",
+            ". Print the solutions to advent of code 2021.",
+            ".",
+            ". optional arguments: ",
+            ".  day      day number as int, has to be between 1 and " ++ show (length solutions) ++ ".",
+            ".  part     which part of the solution, either 1 or 2."
+          ]
+    putStr $ unlines usage
