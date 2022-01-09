@@ -12,7 +12,7 @@ MAIN_FILE_NAME: str = "Main.hs"
 
 def write_file(file_path: str, contents: str = "", force: bool = False):
     """
-    Creates a file with contents if it is not existing, if it is existing and non-empy ask in prompt to create it
+    Creates a file with contents. If it already exists and is non-empty, ask in prompt if it should be created.
     """
     if not force and os.path.exists(file_path) and os.path.getsize(file_path) > 0:
         answer = input(f"File '{file_path}' already existing and is non empty. Should it be overwritten [y/N]? ")
