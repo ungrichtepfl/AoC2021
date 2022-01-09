@@ -15,6 +15,7 @@ import Day07
 import Day08
 import Day09
 import Day10
+import Day11
 import System.Environment
 
 -- Inputs
@@ -79,6 +80,12 @@ inputDay10 = "input/10_syntax_scoring.txt"
 sampleDay10 :: FilePath
 sampleDay10 = "input/10_syntax_scoring-sample.txt"
 
+inputDay11 :: FilePath
+inputDay11 = "input/11_dumbo-octopuses.txt"
+
+sampleDay11 :: FilePath
+sampleDay11 = "input/11_dumbo-octopuses.txt"
+
 type Solution = (IO Int, IO Int)
 
 solutions :: [Solution]
@@ -112,6 +119,9 @@ solutions =
     ),
     ( day10Part1 inputDay10,
       day10Part2 inputDay10
+    ),
+    ( day11Part1 sampleDay11,
+      day11Part2 sampleDay11
     )
   ]
 
