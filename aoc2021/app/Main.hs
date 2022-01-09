@@ -110,8 +110,8 @@ solutions =
     ( day09Part1 inputDay09,
       day09Part2 inputDay09
     ),
-    ( day10Part1 sampleDay10,
-      day10Part2 sampleDay10
+    ( day10Part1 inputDay10,
+      day10Part2 inputDay10
     )
   ]
 
