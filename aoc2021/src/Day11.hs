@@ -12,8 +12,9 @@ day11Part1 fp = do
   contents <- readFile fp
   let startOct = parseInputs contents
   print startOct
-  print $ updateEnergy . updateEnergy $ startOct
-  return $ -1
+  let res = updateAndCountNTimes 100 (startOct, 0)
+  print $ fst res
+  return $ snd res
 
 type Energy = Int
 
@@ -24,6 +25,12 @@ increaseBy1 = mapPos (\_ e -> if e == 9 then 0 else e + 1)
 
 initialFlashing :: Octopuses -> [(Int, Int)]
 initialFlashing = elemIndicesMat 0
+
+updateAndCountNTimes :: Int -> (Octopuses, Int) -> (Octopuses, Int)
+updateAndCountNTimes n = foldr (.) id (replicate n updateAndCount)
+
+updateAndCount :: (Octopuses, Int) -> (Octopuses, Int)
+updateAndCount (oct, count) = let updatedOct = updateEnergy oct in (updatedOct, count + length (elemIndicesMat 0 updatedOct))
 
 updateEnergy :: Octopuses -> Octopuses
 updateEnergy oct = let octUpdated = increaseBy1 oct in foldr updateAround octUpdated $ initialFlashing octUpdated
