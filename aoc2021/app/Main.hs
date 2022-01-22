@@ -121,7 +121,7 @@ solutions =
       day10Part2 inputDay10
     ),
     ( day11Part1 inputDay11,
-      day11Part2 sampleDay11
+      day11Part2 inputDay11
     )
   ]
 

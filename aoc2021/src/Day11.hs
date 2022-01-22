@@ -16,6 +16,15 @@ day11Part1 fp = do
   print $ fst res
   return $ snd res
 
+day11Part2 :: FilePath -> IO Int
+day11Part2 fp = do
+  contents <- readFile fp
+  let startOct = parseInputs contents
+  let (syncedOct, numberOfUpdates) = syncedAt (startOct, 0)
+  print startOct
+  print syncedOct
+  return numberOfUpdates
+
 type Energy = Int
 
 type Octopuses = Matrix Energy
@@ -28,6 +37,9 @@ initialFlashing = elemIndicesMat 0
 
 updateAndCountNTimes :: Int -> (Octopuses, Int) -> (Octopuses, Int)
 updateAndCountNTimes n = foldr (.) id (replicate n updateAndCount)
+
+syncedAt :: (Octopuses, Int) -> (Octopuses, Int)
+syncedAt (oct, i) = if length (elemIndicesMat 0 oct) == ncols oct * nrows oct then (oct, i) else syncedAt (updateEnergy oct, i + 1)
 
 updateAndCount :: (Octopuses, Int) -> (Octopuses, Int)
 updateAndCount (oct, count) = let updatedOct = updateEnergy oct in (updatedOct, count + length (elemIndicesMat 0 updatedOct))
@@ -47,11 +59,6 @@ updateAround (i, j) oct = foldr go oct [(i + 1, j), (i - 1, j), (i, j + 1), (i, 
 
 countFlashing :: Octopuses -> [(Int, Int)] -> Int
 countFlashing oct flashing = undefined
-
-day11Part2 :: FilePath -> IO Int
-day11Part2 fp = do
-  contents <- readFile fp
-  return $ -1
 
 parseInputs :: String -> Octopuses
 parseInputs = fromLists . map (map (read . (: []))) . lines
